@@ -1,38 +1,45 @@
 import pandas as pd
 import sqlite3
    
-banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-cursor = banco.cursor()
 
-cursor.execute('SELECT * FROM produtos')
-lista = cursor.fetchall()
-lista1 = []
-contagem = 0
-codigo = []
-descricao = []
-preco_compra = []
-preco_venda = []
-estoque = []
+#Essa função converte a tebela do banco de dados para visualização
+def visualizar_tabela():
+    #Conectenando ao banco de dados
+    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
+    cursor = banco.cursor()
+    cursor.execute('SELECT * FROM produtos')
+    lista = cursor.fetchall() #Essa variavel recebe o banco de dados
 
-for i in range(len(lista)):
-    lista1.append(list(lista[contagem]))
+    lista1 = []
+    contagem = 0
+    codigo = []
+    descricao_produto = []
+    preco_compra = []
+    preco_venda = []
+    estoque = []
+    
+    #Esse FOR o banco de dados é convertido para listas
+    #e assim separando os valores para cada variavel
+    for _ in range(len(lista)):
+        lista1.append(list(lista[contagem]))
+        
+        lista_dividida = lista1[contagem]
+        #Cada lista irá receber um valor referente
+        codigo.append(lista_dividida[0])
+        descricao_produto.append(lista_dividida[1])
+        preco_compra.append(lista_dividida[2])
+        preco_venda.append(lista_dividida[3])
+        estoque.append(lista_dividida[4])
 
-    lista_dividida = lista1[contagem]
-    codigo.append(lista_dividida[0])
-    descricao.append(lista_dividida[1])
-    preco_compra.append(lista_dividida[2])
-    preco_venda.append(lista_dividida[3])
-    estoque.append(lista_dividida[4])
+        contagem = contagem + 1
 
-    contagem = contagem + 1
-
-print(type(codigo))
-
-tabela = {'Codigo':codigo,
-          'Descrição':descricao,
+    tabela = {'Codigo':codigo,
+          'Descrição':descricao_produto,
           'PreçoCompra':preco_compra,
           'PreçoVenda':preco_venda,
           'Estoque':estoque}
 
-dados = pd.DataFrame(tabela)
-print(dados)
+    dados = pd.DataFrame(tabela)
+    print(dados)
+
+visualizar_tabela()
