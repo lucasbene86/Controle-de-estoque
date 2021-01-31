@@ -42,4 +42,21 @@ def visualizar_tabela():
     dados = pd.DataFrame(tabela)
     print(dados)
 
+#Essa função adiciona produtos na tabela de controle de estoque
+def adicionar_produtos(codigo, descricao, preco_compra, preco_venda, estoque):
+    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
+    cursor = banco.cursor()
+    cursor.execute(f'INSERT INTO produtos VALUES({codigo}, "{descricao}", {preco_compra}, {preco_venda}, {estoque})')
+    
+    banco.commit()
+    banco.close()
+
+codigo_do_produto = 410
+descricao_do_produto = 'Escada'
+preco_de_compra = 50
+preco_de_venda = 150
+quantidade_estoque = 20
+
+adicionar_produtos(codigo_do_produto, descricao_do_produto, preco_de_compra, preco_de_venda, quantidade_estoque)
+
 visualizar_tabela()
