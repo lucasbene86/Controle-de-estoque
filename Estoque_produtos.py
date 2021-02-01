@@ -1,63 +1,21 @@
 import pandas as pd
 import sqlite3
+from manipulando_db.manipulacao import adicionar_produtos
+from manipulando_db.manipulacao import visualizar_tabela
 
+print('\t\tControle de estoque')
 
-# Essa função converte a tebela do banco de dados para visualização
-def visualizar_tabela():
-    # Conectenando ao banco de dados
-    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-    cursor = banco.cursor()
-    cursor.execute('SELECT * FROM produtos')
-    lista = cursor.fetchall()  # Essa variavel recebe o banco de dados
+print('1 - Vizualizar estoque')
+print('2 - Atualizar estoque')
+print('3 - Adicionar produto ao estoque')
+print('4 - Atualizar produto ex:(Código, descrição...)')
+print('5 - Excluir protudo de estoque')
 
-    lista1 = []
-    contagem = 0
-    codigo = []
-    descricao_produto = []
-    preco_compra = []
-    preco_venda = []
-    estoque = []
-
-    # Esse FOR o banco de dados é convertido para listas
-    # e assim separando os valores para cada variavel
-    for _ in range(len(lista)):
-        lista1.append(list(lista[contagem]))
-
-        lista_dividida = lista1[contagem]
-        # Cada lista irá receber um valor referente
-        codigo.append(lista_dividida[0])
-        descricao_produto.append(lista_dividida[1])
-        preco_compra.append(lista_dividida[2])
-        preco_venda.append(lista_dividida[3])
-        estoque.append(lista_dividida[4])
-
-        contagem = contagem + 1
-
-    tabela = {'Codigo': codigo,
-              'Descrição': descricao_produto,
-              'PreçoCompra': preco_compra,
-              'PreçoVenda': preco_venda,
-              'Estoque': estoque}
-
-    dados = pd.DataFrame(tabela)
-    print(dados)
-
-
-# Essa função adiciona produtos na tabela de controle de estoque
-def adicionar_produtos(codigo, descricao, preco_compra, preco_venda, estoque):
-    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-    cursor = banco.cursor()
-    cursor.execute(f'INSERT INTO produtos VALUES({codigo}, "{descricao}", {preco_compra},{preco_venda}, {estoque})')
-
-    banco.commit()
-    banco.close()
-
-
-'''codigo_do_produto = 787
-descricao_do_produto = 'Short'
-preco_de_compra = 10
-preco_de_venda = 20
-quantidade_estoque = 60
+'''codigo_do_produto = 780
+descricao_do_produto = 'Bolsa'
+preco_de_compra = 15
+preco_de_venda = 25
+quantidade_estoque = 4
 
 adicionar_produtos(codigo_do_produto,
                    descricao_do_produto,
@@ -68,19 +26,3 @@ adicionar_produtos(codigo_do_produto,
 visualizar_tabela()'''
 
 
-# Essa função atualiza as unidades dos produtos do estoque
-def atualizar_estoque():
-    visualizar_tabela()
-    produto = int(input('Código do produto: '))
-    quantidade = int(input('Quantidade para o estoque: '))
-
-    # Conectando ao banco
-    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-    cursor = banco.cursor()
-
-    cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade} WHERE Codigo_produto = {produto}')
-
-    banco.commit()
-    banco.close()
-
-atualizar_estoque()
