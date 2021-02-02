@@ -1,7 +1,7 @@
 import pandas as pd
-import sqlite3
 from manipulando_db.manipulacao import adicionar_produtos
 from manipulando_db.manipulacao import visualizar_tabela
+from manipulando_db.manipulacao import atualizar_estoque
 
 print('\t\tControle de estoque')
 
@@ -10,6 +10,15 @@ print('2 - Atualizar estoque')
 print('3 - Adicionar produto ao estoque')
 print('4 - Atualizar produto ex:(Código, descrição...)')
 print('5 - Excluir protudo de estoque')
+
+opcao = int(input('> '))
+
+if opcao == 1:
+    visualizar_tabela()
+elif opcao == 2:
+    atualizar_estoque()
+
+
 
 '''codigo_do_produto = 780
 descricao_do_produto = 'Bolsa'
@@ -21,8 +30,4 @@ adicionar_produtos(codigo_do_produto,
                    descricao_do_produto,
                    preco_de_compra,
                    preco_de_venda,
-                   quantidade_estoque)
-
-visualizar_tabela()'''
-
-
+                   quantidade_estoque)'''
