@@ -2,7 +2,7 @@ import sqlite3
 import pandas as pd
 
 # Essa função converte a tebela do banco de dados para visualização
-def visualizar_tabela():
+def visualizar_estoque():
     # Conectenando ao banco de dados
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
@@ -54,7 +54,7 @@ def adicionar_produtos(codigo, descricao, preco_compra, preco_venda, estoque):
 
 # Essa função atualiza as unidades dos produtos do estoque
 def atualizar_estoque():
-    visualizar_tabela()
+    visualizar_estoque()
     produto = int(input('Código do produto: '))
     quantidade = int(input('Quantidade para o estoque: '))
 
@@ -62,7 +62,12 @@ def atualizar_estoque():
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
 
-    cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade} WHERE Codigo_produto = {produto}')
+    cursor.execute(f'SELECT Quantidade_estoque FROM produtos WHERE Codigo_produto="{produto}"')
+    lista = cursor.fetchall()
+    lista1 = list(lista[0])
+    lista2 = lista1[0]
+
+    cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade + lista2} WHERE Codigo_produto = {produto}')
 
     banco.commit()
     banco.close()

@@ -1,24 +1,34 @@
-import pandas as pd
+import os
 from manipulando_db.manipulacao import adicionar_produtos
-from manipulando_db.manipulacao import visualizar_tabela
+from manipulando_db.manipulacao import visualizar_estoque
 from manipulando_db.manipulacao import atualizar_estoque
+from manipulando_db.manipulacao import atualizar_produto
 
-print('\t\tControle de estoque')
+while True:
 
-print('1 - Vizualizar estoque')
-print('2 - Atualizar estoque')
-print('3 - Adicionar produto ao estoque')
-print('4 - Atualizar produto ex:(Código, descrição...)')
-print('5 - Excluir protudo de estoque')
+    print('\t\tControle de estoque')
 
-opcao = int(input('> '))
+    print('1 - Vizualizar estoque')
+    print('2 - Atualizar estoque')
+    print('3 - Adicionar produto ao estoque')
+    print('4 - Atualizar produto ex:(Código, descrição...)')
+    print('5 - Excluir protudo de estoque')
 
-if opcao == 1:
-    visualizar_tabela()
-elif opcao == 2:
-    atualizar_estoque()
+    opcao = int(input('> '))
 
-
+    if opcao == 1:
+        os.system('cls')
+        visualizar_estoque()
+    elif opcao == 2:
+        os.system('cls')
+        atualizar_estoque()
+        os.system('cls')
+        visualizar_estoque()
+    elif opcao == 3:
+        adicionar_produtos()
+    elif opcao == 4:
+        atualizar_produto()
+    
 
 '''codigo_do_produto = 780
 descricao_do_produto = 'Bolsa'
