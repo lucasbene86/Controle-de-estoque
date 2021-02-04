@@ -78,3 +78,16 @@ def atualizar_produto():
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
 
+
+def verificador_codigo_produto(produto_codigo):
+    lista1 = []
+    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
+    cursor = banco.cursor()
+    cursor.execute(f'SELECT Codigo_produto FROM produtos')
+    lista = cursor.fetchall()
+    for i in range(len(lista)):
+        lista1.append(list(lista[i]))
+        if lista1[i] != [produto_codigo]:
+            pass
+        else:
+            return False
