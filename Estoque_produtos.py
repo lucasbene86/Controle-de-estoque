@@ -20,11 +20,13 @@ while True:
     if opcao == 1:
         os.system('cls')
         visualizar_estoque()
+
     elif opcao == 2:
         os.system('cls')
         atualizar_estoque()
         os.system('cls')
         visualizar_estoque()
+
     elif opcao == 3:
         codigo_do_produto = int(input('Código do produto novo: '))
         while verificador_codigo_produto(codigo_do_produto) == False:
@@ -32,20 +34,20 @@ while True:
                 break
             print('O código do produto digitado já existe!')
             codigo_do_produto = int(input('Código do produto novo: '))
-        
-        print('ok')
 
-        '''descricao_do_produto = 'Brinco'
-        preco_de_compra = 15
-        preco_de_venda = 25
-        quantidade_estoque = 4
+        if verificador_codigo_produto(codigo_do_produto) == False:
+            pass
+        else:
+            descricao_do_produto = 'Brinco'
+            preco_de_compra = 15
+            preco_de_venda = 25
+            quantidade_estoque = 4
 
-        adicionar_produtos(codigo_do_produto,
-                           descricao_do_produto,
-                           preco_de_compra,
-                           preco_de_venda,
-                           quantidade_estoque)'''
+            adicionar_produtos(codigo_do_produto,
+                               descricao_do_produto,
+                               preco_de_compra,
+                               preco_de_venda,
+                               quantidade_estoque)
 
-    elif opcao == 4:
+    elif opcao == 5:
         atualizar_produto()
-
