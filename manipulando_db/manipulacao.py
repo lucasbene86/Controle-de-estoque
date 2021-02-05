@@ -1,5 +1,4 @@
 import sqlite3
-from sqlite3.dbapi2 import Cursor
 import pandas as pd
 
 # Essa função converte a tebela do banco de dados para visualização
@@ -95,9 +94,9 @@ def verificador_codigo_produto(produto_codigo):
 
 
 # Essa função possibilita excluir algum produto do estoque
-def excluir_produto_estoque():
+def excluir_produto_estoque(codigo):
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
-    cursor.execute('DELETE FROM produtos WHERE Codigo_produto = "780"')
+    cursor.execute(f'DELETE FROM produtos WHERE Codigo_produto = "{codigo}"')
     banco.commit()
     banco.close()

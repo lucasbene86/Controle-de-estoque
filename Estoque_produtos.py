@@ -4,6 +4,7 @@ from manipulando_db.manipulacao import visualizar_estoque
 from manipulando_db.manipulacao import atualizar_estoque
 from manipulando_db.manipulacao import atualizar_produto
 from manipulando_db.manipulacao import verificador_codigo_produto
+from manipulando_db.manipulacao import excluir_produto_estoque
 
 while True:
 
@@ -28,6 +29,7 @@ while True:
         visualizar_estoque()
 
     elif opcao == 3:
+        os.system('cls')
         codigo_do_produto = int(input('Código do produto novo: '))
         while verificador_codigo_produto(codigo_do_produto) == False:
             if codigo_do_produto == 0:
@@ -38,10 +40,10 @@ while True:
         if verificador_codigo_produto(codigo_do_produto) == False:
             pass
         else:
-            descricao_do_produto = 'Brinco'
-            preco_de_compra = 15
-            preco_de_venda = 25
-            quantidade_estoque = 4
+            descricao_do_produto = str(input('Nome do produto: '))
+            preco_de_compra = float(input('Preço de compra: R$ '))
+            preco_de_venda = float(input('Preço de venda: R$ '))
+            quantidade_estoque = int(input('Qualidade de estoque disponivel: '))
 
             adicionar_produtos(codigo_do_produto,
                                descricao_do_produto,
@@ -50,4 +52,8 @@ while True:
                                quantidade_estoque)
 
     elif opcao == 5:
-        atualizar_produto()
+        os.system('cls')
+        visualizar_estoque()
+        codigo = int(input('Digite o código do produto que deseja exluir: '))
+        excluir_produto_estoque(codigo)
+        os.system('cls')
