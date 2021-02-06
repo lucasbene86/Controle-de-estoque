@@ -75,10 +75,15 @@ def atualizar_estoque():
 
 
 # Essa função possibilita a alteração de algo de um produto especifico
-def atualizar_produto():
+def atualizar_produto(codigo_produto, valor, opcao):
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
-    cursor.execute('UPDATE produtos SET Descrição_produto = "Pão" WHERE Codigo_produto = 105')
+
+    if opcao == 1:
+        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} WHERE Codigo_produto = {codigo_produto}')
+    elif opcao == 2:
+        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" WHERE Codigo_produto = {codigo_produto}')
+
     banco.commit()
     banco.close()
 
@@ -88,7 +93,7 @@ def verificador_codigo_produto(produto_codigo):
     lista1 = []
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
-    cursor.execute(f'SELECT Codigo_produto FROM produtos')
+    cursor.execute('SELECT Codigo_produto FROM produtos')
     lista = cursor.fetchall()
     for i in range(len(lista)):
         lista1.append(list(lista[i]))
