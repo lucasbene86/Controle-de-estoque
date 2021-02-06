@@ -9,7 +9,7 @@ from manipulando_db.manipulacao import excluir_produto_estoque
 
 while True:
 
-    print('\t\tControle de estoque')
+    print('\t\tControle de estoque\n')
 
     print('1 - Vizualizar estoque')
     print('2 - Atualizar estoque')

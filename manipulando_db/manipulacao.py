@@ -1,6 +1,8 @@
 import sqlite3
 import pandas as pd
 
+from prettytable import PrettyTable
+
 
 # Essa função converte a tebela do banco de dados para visualização
 def visualizar_estoque():
@@ -18,6 +20,16 @@ def visualizar_estoque():
     preco_venda = []
     estoque = []
 
+    tabela = PrettyTable(['Código', 'Descrição', 'Preço Compra', 'Preço Venda', 'Estoque'])
+    
+    tabela.align["Código"] = "l"  # lado esquero
+    tabela.align["Descrição"] = "l"  # lado esquerdo
+    tabela.align["Preço Compra"] = "c"  # centro
+    tabela.align["Preço Venda"] = "r"  # lado direito
+    tabela.align["Estoque"] = "r"  # lado direito
+
+    tabela.padding_width = 1
+
     # Esse FOR o banco de dados é convertido para listas
     # e assim separando os valores para cada variavel
     for _ in range(len(lista)):
@@ -30,17 +42,17 @@ def visualizar_estoque():
         preco_compra.append(lista_dividida[2])
         preco_venda.append(lista_dividida[3])
         estoque.append(lista_dividida[4])
+        
+        tabela = PrettyTable()
+        tabela.add_column('Código', codigo)
+        tabela.add_column('Descrição', descricao_produto)
+        tabela.add_column('Preço de compra', preco_compra)
+        tabela.add_column('Preço de venda', preco_venda)
+        tabela.add_column('Estoque', estoque)
 
         contagem = contagem + 1
 
-    tabela = {'Codigo': codigo,
-              'Descrição': descricao_produto,
-              'PreçoCompra': preco_compra,
-              'PreçoVenda': preco_venda,
-              'Estoque': estoque}
-
-    dados = pd.DataFrame(tabela)
-    print(dados)
+    print(tabela)
 
 
 # Essa função adiciona produtos na tabela de controle de estoque
