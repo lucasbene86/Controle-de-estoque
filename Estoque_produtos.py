@@ -51,6 +51,16 @@ while True:
                                preco_de_venda,
                                quantidade_estoque)
 
+    elif opcao == 4:
+        os.system('cls')
+        print('\tSelecione a opção para edição\n')
+        print('1 - Editar código do produto:')
+        print('2 - Editar descrição do produto:')
+        print('3 - Editar Valor de compra do produto:')
+        print('4 - Editar valor de venda do produto:')
+        opcao = int(input('> '))
+        atualizar_produto()
+
     elif opcao == 5:
         os.system('cls')
         visualizar_estoque()

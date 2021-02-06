@@ -1,6 +1,7 @@
 import sqlite3
 import pandas as pd
 
+
 # Essa função converte a tebela do banco de dados para visualização
 def visualizar_estoque():
     # Conectenando ao banco de dados
@@ -77,8 +78,12 @@ def atualizar_estoque():
 def atualizar_produto():
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
+    cursor.execute('UPDATE produtos SET Descrição_produto = "Pão" WHERE Codigo_produto = 105')
+    banco.commit()
+    banco.close()
 
 
+# Essa função verifica se já existe algum produto no estoque para não se repetir
 def verificador_codigo_produto(produto_codigo):
     lista1 = []
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
