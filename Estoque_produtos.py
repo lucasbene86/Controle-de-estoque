@@ -65,6 +65,7 @@ while True:
         print('4 - Editar valor de venda do produto:')
         opcao = int(input('> '))
 
+        # Opção para editar o código do produto
         if opcao == 1:
             visualizar_estoque()
             codigo_para_alterar = int(input(

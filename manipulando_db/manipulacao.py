@@ -1,5 +1,4 @@
 import sqlite3
-import pandas as pd
 
 from prettytable import PrettyTable
 
@@ -11,7 +10,7 @@ def visualizar_estoque():
     cursor = banco.cursor()
     cursor.execute('SELECT * FROM produtos')
     lista = cursor.fetchall()  # Essa variavel recebe o banco de dados
-
+    
     lista1 = []
     contagem = 0
     codigo = []
@@ -19,16 +18,20 @@ def visualizar_estoque():
     preco_compra = []
     preco_venda = []
     estoque = []
-
-    tabela = PrettyTable(['Código', 'Descrição', 'Preço Compra', 'Preço Venda', 'Estoque'])
     
+    # Cria a tabela
+    tabela = PrettyTable(['Código',
+                          'Descrição',
+                          'Preço Compra',
+                          'Preço Venda',
+                          'Estoque'])
+    
+    # Alinha as colunas
     tabela.align["Código"] = "l"  # lado esquero
     tabela.align["Descrição"] = "l"  # lado esquerdo
     tabela.align["Preço Compra"] = "c"  # centro
     tabela.align["Preço Venda"] = "r"  # lado direito
     tabela.align["Estoque"] = "r"  # lado direito
-
-    tabela.padding_width = 1
 
     # Esse FOR o banco de dados é convertido para listas
     # e assim separando os valores para cada variavel
@@ -51,7 +54,12 @@ def visualizar_estoque():
         tabela.add_column('Estoque', estoque)
 
         contagem = contagem + 1
+    
+    # Deixa um espaço entre a borda das colunas e o conteúdo
+    tabela.padding_width = 1
 
+    # Determina se a primeira linha vem em letras maiúsculas ou não
+    tabela.header_style = 'upper'  # Todas maiúsculas
     print(tabela)
 
 
