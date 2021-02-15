@@ -1,4 +1,5 @@
 import sqlite3
+import time
 
 from prettytable import PrettyTable
 
@@ -10,7 +11,7 @@ def visualizar_estoque():
     cursor = banco.cursor()
     cursor.execute('SELECT * FROM produtos')
     lista = cursor.fetchall()  # Essa variavel recebe o banco de dados
-    
+
     lista1 = []
     contagem = 0
     codigo = []
@@ -18,7 +19,7 @@ def visualizar_estoque():
     preco_compra = []
     preco_venda = []
     estoque = []
-    
+
     # Cria a tabela
     tabela = PrettyTable(['Código',
                           'Descrição',
@@ -76,22 +77,35 @@ def adicionar_produtos(codigo, descricao, preco_compra, preco_venda, estoque):
 # Essa função atualiza as unidades dos produtos do estoque
 def atualizar_estoque():
     visualizar_estoque()
-    produto = int(input('Código do produto: '))
-    quantidade = int(input('Quantidade para o estoque: '))
 
-    # Conectando ao banco
-    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-    cursor = banco.cursor()
+    codigo_produto = int(input('Código do produto ou 0 para sair da opção: '))
 
-    cursor.execute(f'SELECT Quantidade_estoque FROM produtos WHERE Codigo_produto="{produto}"')
-    lista = cursor.fetchall()
-    lista1 = list(lista[0])
-    lista2 = lista1[0]
+    if codigo_produto != 0:
+        while verificador_codigo_produto(codigo_produto) is not False:
+            print('Código não existente!')
+            codigo_produto = int(input('Código do produto: '))
 
-    cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade + lista2} WHERE Codigo_produto = {produto}')
+            if codigo_produto == 0:
+                return print('Função cancelada!')
 
-    banco.commit()
-    banco.close()
+        quantidade = int(input('Quantidade para o estoque: '))
+
+        # Conectando ao banco
+        banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
+        cursor = banco.cursor()
+        cursor.execute(f'SELECT Quantidade_estoque FROM produtos WHERE Codigo_produto="{codigo_produto}"')
+
+        dados_db = cursor.fetchall()
+        dados_em_lista = list(dados_db[0])
+        quantidade_do_estoque = dados_em_lista[0]
+
+        cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade + quantidade_do_estoque} WHERE Codigo_produto = {codigo_produto}')
+
+        banco.commit()
+        banco.close()
+    
+    else:
+        return print('Função cancelada!')
 
 
 # Essa função possibilita a alteração de algo de um produto especifico

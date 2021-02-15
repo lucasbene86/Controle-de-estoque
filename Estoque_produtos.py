@@ -19,19 +19,19 @@ while True:
 
     opcao = int(input('> '))
 
-# Visualizar estoque
+    # Visualizar estoque
     if opcao == 1:
         os.system('cls')
         visualizar_estoque()
 
-# Atualizar estoque
+    # Atualizar estoque
     elif opcao == 2:
         os.system('cls')
         atualizar_estoque()
         os.system('cls')
         visualizar_estoque()
 
-# Adicionar produto ao estoque
+    # Adicionar produto ao estoque
     elif opcao == 3:
         os.system('cls')
         codigo_do_produto = int(input('Código do produto novo: '))
@@ -55,7 +55,7 @@ while True:
                                preco_de_venda,
                                quantidade_estoque)
 
-# Atualizar produto 
+    # Atualizar produto 
     elif opcao == 4:
         os.system('cls')
         print('\tSelecione a opção para edição\n')
@@ -80,7 +80,8 @@ while True:
                 pass
             else:
                 atualizar_produto(codigo_para_alterar, valor, opcao)
-
+        
+        # Opção para editar a descrição do produto
         elif opcao == 2:
             visualizar_estoque()
             codigo_para_alterar = int(input(
@@ -88,7 +89,7 @@ while True:
             descricao_nova = str(input('Digite a nova descrição: '))
             atualizar_produto(codigo_para_alterar, descricao_nova, opcao)
 
-# Excluir produto do estoque
+    # Excluir produto do estoque
     elif opcao == 5:
         os.system('cls')
         visualizar_estoque()
