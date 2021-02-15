@@ -1,5 +1,4 @@
 import sqlite3
-import time
 
 from prettytable import PrettyTable
 
@@ -115,6 +114,7 @@ def atualizar_produto(codigo_produto, valor, opcao):
 
     if opcao == 1:
         cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} WHERE Codigo_produto = {codigo_produto}')
+
     elif opcao == 2:
         cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" WHERE Codigo_produto = {codigo_produto}')
 
@@ -123,18 +123,21 @@ def atualizar_produto(codigo_produto, valor, opcao):
 
 
 # Essa função verifica se já existe algum produto no estoque para não se repetir
-def verificador_codigo_produto(produto_codigo):
-    lista1 = []
+def verificador_codigo_produto(codigo_produto):
+    lista_codigos = []
+
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
     cursor.execute('SELECT Codigo_produto FROM produtos')
-    lista = cursor.fetchall()
-    for i in range(len(lista)):
-        lista1.append(list(lista[i]))
-        if lista1[i] != [produto_codigo]:
+    dados_db = cursor.fetchall()
+
+    for contagem in range(len(dados_db)):
+        lista_codigos.append(list(dados_db[contagem]))
+
+        if lista1[contagem] != [codigo_produto]:
             pass
         else:
-            return False
+            return True
 
 
 # Essa função possibilita excluir algum produto do estoque
