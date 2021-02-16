@@ -9,10 +9,9 @@ def visualizar_estoque():
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
     cursor.execute('SELECT * FROM produtos')
-    lista = cursor.fetchall()  # Essa variavel recebe o banco de dados
+    dados_db = cursor.fetchall()  # Essa variavel recebe o banco de dados
 
     lista1 = []
-    contagem = 0
     codigo = []
     descricao_produto = []
     preco_compra = []
@@ -25,7 +24,7 @@ def visualizar_estoque():
                           'Preço Compra',
                           'Preço Venda',
                           'Estoque'])
-    
+
     # Alinha as colunas
     tabela.align["Código"] = "l"  # lado esquero
     tabela.align["Descrição"] = "l"  # lado esquerdo
@@ -33,10 +32,11 @@ def visualizar_estoque():
     tabela.align["Preço Venda"] = "r"  # lado direito
     tabela.align["Estoque"] = "r"  # lado direito
 
-    # Esse FOR o banco de dados é convertido para listas
-    # e assim separando os valores para cada variavel
-    for _ in range(len(lista)):
-        lista1.append(list(lista[contagem]))
+    contagem = 0
+    '''Esse FOR o banco de dados é convertido para listas
+     e assim separando os valores para cada variavel'''
+    for _ in range(len(dados_db)):
+        lista1.append(list(dados_db[contagem]))
 
         lista_dividida = lista1[contagem]
         # Cada lista irá receber um valor referente
@@ -134,16 +134,32 @@ def verificador_codigo_produto(codigo_produto):
     for contagem in range(len(dados_db)):
         lista_codigos.append(list(dados_db[contagem]))
 
-        if lista1[contagem] != [codigo_produto]:
+        if lista_codigos[contagem] != [codigo_produto]:
             pass
         else:
             return True
 
 
-# Essa função possibilita excluir algum produto do estoque
-def excluir_produto_estoque(codigo):
-    banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
-    cursor = banco.cursor()
-    cursor.execute(f'DELETE FROM produtos WHERE Codigo_produto = "{codigo}"')
-    banco.commit()
-    banco.close()
+# Essa função possibilita excluir algum produto do estoque.
+def excluir_produto_estoque():
+    codigo = int(input('Digite o código do produto'
+                       'que deseja exluir ou 0 para cancelar: '))
+    
+    if codigo != 0:
+        #Enquanto o codigo digitado não existir, ficar no loop while.
+        while verificador_codigo_produto(codigo) is not True:
+            print('Código não existente!!!\n')
+            codigo = int(input('Digite o código do produto'
+                               'que deseja exluir ou 0 para cancelar: '))
+            if codigo == 0:
+                return
+
+        banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
+        cursor = banco.cursor()
+        cursor.execute(f'DELETE FROM produtos WHERE Codigo_produto = "{codigo}"')
+
+        banco.commit()
+        banco.close()
+    
+    else:
+        return 

@@ -8,9 +8,11 @@ from manipulando_db.manipulacao import verificador_codigo_produto
 from manipulando_db.manipulacao import excluir_produto_estoque
 
 while True:
+    os.system('cls')
+    visualizar_estoque()
 
     print('\t\tControle de estoque\n')
-
+    
     print('1 - Vizualizar estoque')
     print('2 - Atualizar estoque')
     print('3 - Adicionar produto ao estoque')
@@ -93,6 +95,5 @@ while True:
     elif opcao == 5:
         os.system('cls')
         visualizar_estoque()
-        codigo = int(input('Digite o código do produto que deseja exluir: '))
-        excluir_produto_estoque(codigo)
+        excluir_produto_estoque()
         os.system('cls')
