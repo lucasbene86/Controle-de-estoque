@@ -40,14 +40,14 @@ def visualizar_estoque():
         lista1.append(list(dados_db[contagem]))
 
         lista_dividida = lista1[contagem]
-        # Cada lista irá receber um valor referente
+        # Cada lista irá receber um valor referente.
         codigo.append(lista_dividida[0])
         descricao_produto.append(lista_dividida[1])
         preco_compra.append(str(f'R$ {lista_dividida[2]}'))
         preco_venda.append(str(f'R$ {lista_dividida[3]}'))
-        estoque.append(lista_dividida[4])
+        estoque.append(str(f'{lista_dividida[4]} uni.'))
 
-
+        # Será adicionado valores em cada linha da tabela.
         tabela = PrettyTable()
         tabela.add_column('Código', codigo)
         tabela.add_column('Descrição', descricao_produto)
