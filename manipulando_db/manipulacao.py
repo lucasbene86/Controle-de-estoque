@@ -21,6 +21,7 @@ def visualizar_estoque():
     # Cria a tabela
     tabela = PrettyTable(['Código',
                           'Descrição',
+                          ' ',
                           'Preço Compra',
                           'Preço Venda',
                           'Estoque'])
@@ -42,9 +43,10 @@ def visualizar_estoque():
         # Cada lista irá receber um valor referente
         codigo.append(lista_dividida[0])
         descricao_produto.append(lista_dividida[1])
-        preco_compra.append(lista_dividida[2])
-        preco_venda.append(lista_dividida[3])
+        preco_compra.append(str(f'R$ {lista_dividida[2]}'))
+        preco_venda.append(str(f'R$ {lista_dividida[3]}'))
         estoque.append(lista_dividida[4])
+
 
         tabela = PrettyTable()
         tabela.add_column('Código', codigo)
