@@ -65,9 +65,10 @@ while True:
         print('2 - Editar descrição do produto:')
         print('3 - Editar Valor de compra do produto:')
         print('4 - Editar valor de venda do produto:')
+        print('0 - Para voltar ao menu principal:')
         opcao = int(input('> '))
 
-        # Opção para editar o código do produto
+        # Opção para editar o código do produto.
         if opcao == 1:
             visualizar_estoque()
             codigo_para_alterar = int(input(
@@ -82,16 +83,44 @@ while True:
                 pass
             else:
                 atualizar_produto(codigo_para_alterar, valor, opcao)
-        
-        # Opção para editar a descrição do produto
+
+        # Opção para editar a descrição do produto.
         elif opcao == 2:
             visualizar_estoque()
             codigo_para_alterar = int(input(
                     'Digite o código do produto que será alterado: '))
+
             descricao_nova = str(input('Digite a nova descrição: '))
             atualizar_produto(codigo_para_alterar, descricao_nova, opcao)
 
-    # Excluir produto do estoque
+        # Opçao para alterar o preço de compra do produto.
+        elif opcao == 3:
+            visualizar_estoque()
+
+            codigo = int(input(
+                    'Digite o código do produto que será alterado: '))
+
+            preco_de_compra_novo = int(input('Preço de compra novo: R$ '))
+
+            atualizar_produto(codigo, preco_de_compra_novo, opcao)
+
+        # Opção para alterar o preço de venda do produto.
+        elif opcao == 4:
+            visualizar_estoque()
+            
+            codigo = int(input(
+                    'Digite o código do produto que será alterado'))
+            
+            preco_de_venda_novo = int(input(
+                    'Digite o novo valor de venda: R$ '))
+
+            atualizar_produto(codigo, preco_de_venda_novo, opcao)
+
+        # Opção para voltar ao menu principal.
+        elif opcao == 0:
+            print('Voltar ao menu.')
+
+    # Excluir produto do estoque.
     elif opcao == 5:
         os.system('cls')
         visualizar_estoque()

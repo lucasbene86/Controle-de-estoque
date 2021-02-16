@@ -109,16 +109,29 @@ def atualizar_estoque():
         return print('Função cancelada!')
 
 
-# Essa função possibilita a alteração de algo de um produto especifico
+# Essa função possibilita a alteração de algo de um produto especifico.
 def atualizar_produto(codigo_para_alteracao, valor, opcao):
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
 
+    # Altera o codigo do produto.
     if opcao == 1:
-        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute('UPDATE produtos SET Codigo_produto = '
+                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
 
+    # Altera a descrição do produto.
     elif opcao == 2:
-        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute('UPDATE produtos SET Descrição_produto = '
+                f'"{valor}" WHERE Codigo_produto = {codigo_para_alteracao}')
+
+    # altera o preço de compra do produto.
+    elif opcao == 3:
+        cursor.execute('UPDATE produtos SET Preço_compra = '
+                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
+
+    elif opcao == 4:
+        cursor.execute('UPDATE produtos SET Preço_venda = '
+                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
 
     banco.commit()
     banco.close()
