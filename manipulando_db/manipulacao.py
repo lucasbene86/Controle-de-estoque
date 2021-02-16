@@ -95,16 +95,16 @@ def atualizar_estoque():
         # Conectando ao banco
         banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
         cursor = banco.cursor()
-        cursor.execute(f'SELECT Quantidade_estoque FROM produtos '
-                       f'WHERE Codigo_produto = "{codigo_produto}"')
+        cursor.execute('SELECT Quantidade_estoque FROM produtos '
+                      f'WHERE Codigo_produto = "{codigo_produto}"')
 
         dados_db = cursor.fetchall()
         dados_em_lista = list(dados_db[0])
         quantidade_do_estoque = dados_em_lista[0]
 
         cursor.execute('UPDATE produtos SET Quantidade_estoque = '
-                       f'{quantidade + quantidade_do_estoque}'
-                       f'WHERE Codigo_produto = {codigo_produto}')
+                      f'{quantidade + quantidade_do_estoque} '
+                      f'WHERE Codigo_produto = {codigo_produto}')
 
         banco.commit()
         banco.close()
