@@ -120,21 +120,21 @@ def atualizar_produto(codigo_para_alteracao, valor, opcao):
 
     # Altera o codigo do produto.
     if opcao == 1:
-        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor}'
+        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} '
                        f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     # Altera a descrição do produto.
     elif opcao == 2:
-        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" '
+        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor} " '
                        f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     # altera o preço de compra do produto.
     elif opcao == 3:
-        cursor.execute(f'UPDATE produtos SET Preço_compra = {valor}'
+        cursor.execute(f'UPDATE produtos SET Preço_compra = {valor} '
                        f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     elif opcao == 4:
-        cursor.execute(f'UPDATE produtos SET Preço_venda = {valor}'
+        cursor.execute(f'UPDATE produtos SET Preço_venda = {valor} '
                        f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     banco.commit()
