@@ -11,7 +11,7 @@ while True:
     os.system('cls')
     visualizar_estoque()
 
-    print('\t\tControle de estoque\n')
+    print('\t\tControle de estoque - 9 -> Infor.\n')
 
     print('1 - Vizualizar estoque')
     print('2 - Atualizar estoque')
@@ -126,3 +126,14 @@ while True:
         visualizar_estoque()
         excluir_produto_estoque()
         os.system('cls')
+
+    elif opcao == 9:
+        os.system('cls')
+        print('Informações:\n')
+        print('Desenvolvedor: João Lucas Benevides')
+        print('E-mail: lucasbene86@gmail.com')
+        print('Linkedin: www.linkedin.com/in/joaolucasbenevides')
+        print('Ano: 2021')
+        print('Versão: 1.0')
+        print('Objetivo: Estudos')
+        os.system('pause')
