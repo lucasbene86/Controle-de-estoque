@@ -45,7 +45,7 @@ def visualizar_estoque():
         preco_compra.append(lista_dividida[2])
         preco_venda.append(lista_dividida[3])
         estoque.append(lista_dividida[4])
-        
+
         tabela = PrettyTable()
         tabela.add_column('Código', codigo)
         tabela.add_column('Descrição', descricao_produto)
@@ -54,7 +54,7 @@ def visualizar_estoque():
         tabela.add_column('Estoque', estoque)
 
         contagem = contagem + 1
-    
+
     # Deixa um espaço entre a borda das colunas e o conteúdo
     tabela.padding_width = 1
 
@@ -100,11 +100,13 @@ def atualizar_estoque():
         dados_em_lista = list(dados_db[0])
         quantidade_do_estoque = dados_em_lista[0]
 
-        cursor.execute(f'UPDATE produtos SET Quantidade_estoque = {quantidade + quantidade_do_estoque} WHERE Codigo_produto = {codigo_produto}')
+        cursor.execute('UPDATE produtos SET Quantidade_estoque = '
+                       f'{quantidade + quantidade_do_estoque}'
+                       f'WHERE Codigo_produto = {codigo_produto}')
 
         banco.commit()
         banco.close()
-    
+
     else:
         return print('Função cancelada!')
 
@@ -116,28 +118,28 @@ def atualizar_produto(codigo_para_alteracao, valor, opcao):
 
     # Altera o codigo do produto.
     if opcao == 1:
-        cursor.execute('UPDATE produtos SET Codigo_produto = '
-                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor}'
+                       f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     # Altera a descrição do produto.
     elif opcao == 2:
-        cursor.execute('UPDATE produtos SET Descrição_produto = '
-                f'"{valor}" WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" '
+                       f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     # altera o preço de compra do produto.
     elif opcao == 3:
-        cursor.execute('UPDATE produtos SET Preço_compra = '
-                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute(f'UPDATE produtos SET Preço_compra = {valor}'
+                       f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     elif opcao == 4:
-        cursor.execute('UPDATE produtos SET Preço_venda = '
-                f'{valor} WHERE Codigo_produto = {codigo_para_alteracao}')
+        cursor.execute(f'UPDATE produtos SET Preço_venda = {valor}'
+                       f'WHERE Codigo_produto = {codigo_para_alteracao}')
 
     banco.commit()
     banco.close()
 
 
-# Essa função verifica se já existe algum produto no estoque para não se repetir
+# Essa função verifica se já existe algum produto no estoque com o código
 def verificador_codigo_produto(codigo_produto):
     lista_codigos = []
 
@@ -159,9 +161,9 @@ def verificador_codigo_produto(codigo_produto):
 def excluir_produto_estoque():
     codigo = int(input('Digite o código do produto'
                        'que deseja exluir ou 0 para cancelar: '))
-    
+
     if codigo != 0:
-        #Enquanto o codigo digitado não existir, ficar no loop while.
+        # Enquanto o codigo digitado não existir, ficar no loop while.
         while verificador_codigo_produto(codigo) is not True:
             print('Código não existente!!!\n')
             codigo = int(input('Digite o código do produto'
@@ -171,10 +173,10 @@ def excluir_produto_estoque():
 
         banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
         cursor = banco.cursor()
-        cursor.execute(f'DELETE FROM produtos WHERE Codigo_produto = "{codigo}"')
+        cursor.execute(f'DELETE FROM produtos WHERE Codigo_produto="{codigo}"')
 
         banco.commit()
         banco.close()
-    
+
     else:
-        return 
+        return

@@ -12,7 +12,7 @@ while True:
     visualizar_estoque()
 
     print('\t\tControle de estoque\n')
-    
+
     print('1 - Vizualizar estoque')
     print('2 - Atualizar estoque')
     print('3 - Adicionar produto ao estoque')
@@ -57,7 +57,7 @@ while True:
                                preco_de_venda,
                                quantidade_estoque)
 
-    # Atualizar produto 
+    # Atualizar produto
     elif opcao == 4:
         os.system('cls')
         print('\tSelecione a opção para edição\n')
@@ -107,10 +107,10 @@ while True:
         # Opção para alterar o preço de venda do produto.
         elif opcao == 4:
             visualizar_estoque()
-            
+
             codigo = int(input(
                     'Digite o código do produto que será alterado'))
-            
+
             preco_de_venda_novo = int(input(
                     'Digite o novo valor de venda: R$ '))
 
