@@ -74,11 +74,11 @@ while True:
                     'Digite o código que será alterado: '))
 
             valor = int(input('Digite o novo código: '))
-            while verificador_codigo_produto(valor) is False:
-                print('Valor de código já existente!')
+            while verificador_codigo_produto(valor) is True:
+                print('Valor de código já existente!\n')
                 valor = int(input('Digite o novo código: '))
 
-            if verificador_codigo_produto(valor) is False:
+            if verificador_codigo_produto(valor) is True:
                 pass
             else:
                 atualizar_produto(codigo_para_alterar, valor, opcao)

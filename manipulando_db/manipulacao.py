@@ -67,7 +67,8 @@ def visualizar_estoque():
 def adicionar_produtos(codigo, descricao, preco_compra, preco_venda, estoque):
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
-    cursor.execute(f'INSERT INTO produtos VALUES({codigo}, "{descricao}", {preco_compra},{preco_venda}, {estoque})')
+    cursor.execute(f'INSERT INTO produtos VALUES({codigo}, "{descricao}",'
+                   f'{preco_compra},{preco_venda}, {estoque})')
 
     banco.commit()
     banco.close()
@@ -80,8 +81,8 @@ def atualizar_estoque():
     codigo_produto = int(input('Código do produto ou 0 para sair da opção: '))
 
     if codigo_produto != 0:
-        while verificador_codigo_produto(codigo_produto) is not False:
-            print('Código não existente!')
+        while verificador_codigo_produto(codigo_produto) is not True:
+            print('Código não existente!\n')
             codigo_produto = int(input('Código do produto: '))
 
             if codigo_produto == 0:
@@ -92,7 +93,8 @@ def atualizar_estoque():
         # Conectando ao banco
         banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
         cursor = banco.cursor()
-        cursor.execute(f'SELECT Quantidade_estoque FROM produtos WHERE Codigo_produto="{codigo_produto}"')
+        cursor.execute(f'SELECT Quantidade_estoque FROM produtos '
+                       f'WHERE Codigo_produto = "{codigo_produto}"')
 
         dados_db = cursor.fetchall()
         dados_em_lista = list(dados_db[0])
@@ -108,15 +110,15 @@ def atualizar_estoque():
 
 
 # Essa função possibilita a alteração de algo de um produto especifico
-def atualizar_produto(codigo_produto, valor, opcao):
+def atualizar_produto(codigo_para_alteracao, valor, opcao):
     banco = sqlite3.connect('D:/Python/Estoque/Banco.db')
     cursor = banco.cursor()
 
     if opcao == 1:
-        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} WHERE Codigo_produto = {codigo_produto}')
+        cursor.execute(f'UPDATE produtos SET Codigo_produto = {valor} WHERE Codigo_produto = {codigo_para_alteracao}')
 
     elif opcao == 2:
-        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" WHERE Codigo_produto = {codigo_produto}')
+        cursor.execute(f'UPDATE produtos SET Descrição_produto = "{valor}" WHERE Codigo_produto = {codigo_para_alteracao}')
 
     banco.commit()
     banco.close()
